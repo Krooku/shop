@@ -13,10 +13,10 @@ var bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json({ limit: '10mb' }))
 
-if (process.env.USECORS || config.useCors) {
+if (process.env.USECORS) { // || config.useCors
   app.use(
     cors({
-      origin: process.env.FRONTENDURL || config.frontendUrl,
+      origin: process.env.FRONTENDURL, // || config.frontendUrl,
       credentials: true
     })
   )
@@ -27,7 +27,7 @@ app.use(session({
   store: new SQLiteStore({
     db: 'sessions.db'
   }),
-  secret: process.env.SECRET || config.cookieSecret,
+  secret: process.env.SECRET, // || config.cookieSecret,
   resave: false,
   saveUninitialized: false,
   cookie: {
