@@ -11,8 +11,8 @@ mongoose.connect(process.env.MONGOURI, { // config.mongoUri ||
   useCreateIndex: true
 }).then(async () => {
   const port = process.env.PORT // || config.expressPort
-  app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`)
+  app.listen(port || 3000, () => {
+    console.log(`Server is listening on port ${port || 3000}`)
   })
 }).catch((error) => {
   console.log('Error occured while initializing server')
