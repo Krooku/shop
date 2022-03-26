@@ -39,14 +39,14 @@ app.use(express.json({ limit: '50mb' }))
 app.use('/api', router)
 app.use('/uploads', express.static('uploads'))
 app.use('/', express.static(path.join(__dirname, '/../public/')))
-app.get(/.*/, (req, res) => res.sendFile(path.join(__dirname, '/../public/index.html')))
+// app.get(/.*/, (req, res) => res.sendFile(path.join(__dirname, '/../public/index.html')))
 
 // app.use(express.json())
 // app.disable('x-powered-by')
 
 // app.use('/api', router)
 // app.use('/static', express.static(path.join(__dirname, '/../public/static')))
-// app.get('/', function (req, res) {
-//   res.sendFile('index.html', { root: path.join(__dirname, '/../public') })
-// })
+app.get('/', function (req, res) {
+  res.sendFile('index.html', { root: path.join(__dirname, '/../public') })
+})
 module.exports = app
