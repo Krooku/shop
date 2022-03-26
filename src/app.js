@@ -5,7 +5,7 @@ const SQLiteStore = require('connect-sqlite3')(session)
 const cors = require('cors')
 const path = require('path')
 
-const config = require('./config')
+// const config = require('./config')
 const router = require('./routes')
 
 var bodyParser = require('body-parser')
@@ -13,7 +13,7 @@ var bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json({ limit: '10mb' }))
 
-if (config.useCors || process.env.USECORS) {
+if (process.env.USECORS || config.useCors) {
   app.use(
     cors({
       origin: process.env.FRONTENDURL || config.frontendUrl,
