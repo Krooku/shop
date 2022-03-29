@@ -51,5 +51,5 @@ router.patch('/user/removeProductsFromCart/:productId', verifyLogin, auth.remove
 router.get('/user/cart', verifyLogin, auth.getCart)
 
 router.post('/product', upload.array('productImage', 10), verifyRole(['admin']), product.insertProduct)
-router.get('/products', product.listProducts)
+router.get('/products/:skip', product.listProducts)
 module.exports = router

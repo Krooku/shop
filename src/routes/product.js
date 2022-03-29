@@ -49,7 +49,19 @@ module.exports.insertProduct = async (req, res) => {
 }
 
 module.exports.listProducts = async (req, res) => {
-  const products = await Product.find().exec()
+  try {
+    console.log(req.query)
+    const skip = req.params.skip && /^\d+$/.test(req.params.skip) ? Number(req.params.skip) : 0
+    console.log(skip)
+    const products = await Product.find({}, undefined, { skip: skip, limit: 6 }).exec()
 
-  res.status(200).json(products)
+    // const products = await Product.find().exec()
+
+    res.status(200).json(products)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Database error',
+      error: error
+    })
+  }
 }

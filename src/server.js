@@ -1,16 +1,16 @@
 // @ts-check
 const mongoose = require('mongoose')
 
-// const config = require('./config')
+const config = require('./config')
 const app = require('./app')
 
-mongoose.connect(process.env.MONGOURI, { // config.mongoUri ||
+mongoose.connect(process.env.MONGOURI || config.mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true
 }).then(async () => {
-  const port = process.env.PORT // || config.expressPort
+  const port = process.env.PORT || config.expressPort
   app.listen(port || 3000, () => {
     console.log(`Server is listening on port ${port || 3000}`)
   })
