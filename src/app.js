@@ -12,8 +12,8 @@ var bodyParser = require('body-parser')
 
 const app = express()
 app.use(bodyParser.json({ limit: '10mb' }))
-
-if (process.env.USECORS || config.useCors) {
+const test = false
+if (test) { // process.env.USECORS || config.useCors
   app.use(
     cors({
       origin: process.env.FRONTENDURL || config.frontendUrl,
