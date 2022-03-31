@@ -60,8 +60,11 @@ router.post('/user/resetPassword', auth.resetPassword)
 
 router.get('/auth/facebook', passport.authenticate('facebook'))
 
-router.get('/auth/facebook/shop', passport.authenticate('facebook', { failureRedirect: '/login' }), function (req, res) {
+router.get('/auth/facebook/shop', function (req, res, next) {
   console.log('success')
+  passport.authenticate('facebook', function (err, user, info) {
+    res.status(200).json({ err, user, info })
+  })(req, res, next)
 })
 
 router.patch('/user/addToCart/:productId', verifyLogin, auth.addToCart)
