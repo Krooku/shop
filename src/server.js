@@ -1,7 +1,7 @@
 // @ts-check
 const mongoose = require('mongoose')
 
-const config = require('./config')
+const config = undefined // require('./config')
 const app = require('./app')
 
 mongoose.connect(process.env.MONGOURI || config.mongoUri, {
