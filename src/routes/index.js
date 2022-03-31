@@ -41,7 +41,7 @@ const FacebookStrategy = require('passport-facebook').Strategy
 passport.use(new FacebookStrategy({
   clientID: process.env.FB_ID,
   clientSecret: process.env.FB_SECRET,
-  callbackURL: process.env.FB_CB_URL// 'http://localhost:3000/auth/facebook/shop'
+  callbackURL: process.env.FB_CB_URL
 }, function (accessToken, refreshToken, profile, cb) {
   // user find or create function
   console.log(profile)

@@ -1,5 +1,5 @@
 {
-  "name": "planner-backend",
+  "name": "shop-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,11 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "author": "",
+  "engines" : { 
+    "npm" : ">=8.5.5",
+    "node" : ">=12.22.10"
+  },
+  "author": "kroku",
   "license": "ISC",
   "dependencies": {
     "config": "^3.2.3",
