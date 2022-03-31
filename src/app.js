@@ -12,17 +12,11 @@ var bodyParser = require('body-parser')
 
 const app = express()
 app.use(bodyParser.json({ limit: '10mb' }))
-var whitelist = ['http://localhost:8080', 'http://facebook.com', 'https://saritagun.herokuapp.com']
+// const whitelist = ['http://localhost:8080', 'https://facebook.com', 'https://saritagun.herokuapp.com/*']
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true)
-      } else {
-        callback(new Error('Not allowed by CORS'))
-      }
-    },
-    credentials: true
+    origin: '*',
+    credentials: false
   })
 )
 
