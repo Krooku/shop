@@ -35,6 +35,19 @@ const verifyRole = require('../middleware/verifyRole')
 
 const router = express.Router()
 
+const passport = require('passport')
+const FacebookStrategy = require('passport-facebook').Strategy
+
+passport.use(new FacebookStrategy({
+  clientID: '1369553153510750',
+  clientSecret: 'ecd71e1b3a33bf162968a97b1ec04ed6',
+  callbackURL: 'http://localhost:3000/auth/facebook/shop'
+}, function (accessToken, refreshToken, profile, cb) {
+  // user find or create function
+  console.log(profile)
+}
+))
+
 router.post('/login', auth.login)
 router.post('/logout', auth.logout)
 router.post('/register', auth.register)
@@ -44,6 +57,12 @@ router.patch('/user', verifyLogin, auth.updateUser)
 router.get('/user/verify/:token', auth.verifyEmail)
 router.post('/user/sendReset', auth.sendReset)
 router.post('/user/resetPassword', auth.resetPassword)
+
+router.get('/auth/facebook', passport.authenticate('facebook'))
+
+router.get('/auth/facebook/shop', passport.authenticate('facebook', { failureRedirect: '/login' }), function (req, res) {
+  console.log('success')
+})
 
 router.patch('/user/addToCart/:productId', verifyLogin, auth.addToCart)
 router.patch('/user/removeFromCart/:productId', verifyLogin, auth.removeFromCart)
