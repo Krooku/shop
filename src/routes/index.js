@@ -35,6 +35,19 @@ const verifyRole = require('../middleware/verifyRole')
 
 const router = express.Router()
 
+const cors = require('cors')
+
+var allowlist = ['http://localhost:8080', 'https://saritagun.herokuapp.com', 'https://facebook.com']
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions
+  if (allowlist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy
 
@@ -58,7 +71,7 @@ router.get('/user/verify/:token', auth.verifyEmail)
 router.post('/user/sendReset', auth.sendReset)
 router.post('/user/resetPassword', auth.resetPassword)
 
-router.get('/auth/facebook', function (req, res, next) {
+router.get('/auth/facebook', cors(corsOptionsDelegate), function (req, res, next) {
   console.log('/auth/facebook')
   passport.authenticate('facebook', function (err, user, info) {
     console.log(err + ' ' + user + ' ' + info)
@@ -66,7 +79,7 @@ router.get('/auth/facebook', function (req, res, next) {
   })(req, res, next)
 })
 
-router.get('/auth/facebook/shop', function (req, res, next) {
+router.get('/auth/facebook/shop', cors(corsOptionsDelegate), function (req, res, next) {
   console.log('/auth/facebook/shop')
   passport.authenticate('facebook', function (err, user, info) {
     console.log(err + ' ' + user + ' ' + info)

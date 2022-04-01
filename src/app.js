@@ -2,7 +2,7 @@
 const express = require('express')
 const session = require('express-session')
 const SQLiteStore = require('connect-sqlite3')(session)
-const cors = require('cors')
+// const cors = require('cors')
 const path = require('path')
 
 const config = undefined // require('./config')
@@ -13,17 +13,7 @@ var bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json({ limit: '10mb' }))
 
-var allowlist = ['http://localhost:8080', 'https://saritagun.herokuapp.com', 'https://facebook.com']
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions
-  if (allowlist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
-  }
-  callback(null, corsOptions) // callback expects two parameters: error and options
-}
-app.options('*', cors(corsOptionsDelegate))
+// app.options('*', cors(corsOptionsDelegate))
 // const whitelist = ['http://localhost:8080', 'https://facebook.com', 'https://saritagun.herokuapp.com/*']
 /* app.use(
   cors({
