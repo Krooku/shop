@@ -2,7 +2,7 @@
 const express = require('express')
 const session = require('express-session')
 const SQLiteStore = require('connect-sqlite3')(session)
-const cors = require('cors')
+// const cors = require('cors')
 const path = require('path')
 
 const config = undefined // require('./config')
@@ -13,12 +13,12 @@ var bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json({ limit: '10mb' }))
 // const whitelist = ['http://localhost:8080', 'https://facebook.com', 'https://saritagun.herokuapp.com/*']
-app.use(
+/* app.use(
   cors({
     origin: '*',
     credentials: false
   })
-)
+) */
 
 app.use(session({
   // @ts-ignore

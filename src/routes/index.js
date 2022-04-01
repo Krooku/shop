@@ -58,11 +58,18 @@ router.get('/user/verify/:token', auth.verifyEmail)
 router.post('/user/sendReset', auth.sendReset)
 router.post('/user/resetPassword', auth.resetPassword)
 
-router.get('/auth/facebook', passport.authenticate('facebook'))
+router.get('/auth/facebook', function (req, res, next) {
+  console.log('/auth/facebook')
+  passport.authenticate('facebook', function (err, user, info) {
+    console.log(err + ' ' + user + ' ' + info)
+    res.status(200).json({ err, user, info })
+  })(req, res, next)
+})
 
 router.get('/auth/facebook/shop', function (req, res, next) {
-  console.log('success')
+  console.log('/auth/facebook/shop')
   passport.authenticate('facebook', function (err, user, info) {
+    console.log(err + ' ' + user + ' ' + info)
     res.status(200).json({ err, user, info })
   })(req, res, next)
 })
